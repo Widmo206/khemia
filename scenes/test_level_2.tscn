@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://tn8o5kejvfag"]
+
+[ext_resource type="Script" uid="uid://b6oa08ok2smtm" path="res://scripts/Player3D.cs" id="1_btw1g"]
+[ext_resource type="Script" uid="uid://bare2qiduph7x" path="res://scripts/CameraPivot.cs" id="2_u7g1f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cib78"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_me0hx"]
+
+[sub_resource type="VoxelGeneratorNoise2D" id="VoxelGeneratorNoise2D_btw1g"]
+noise = SubResource("FastNoiseLite_me0hx")
+channel = 0
+height_range = 100.0
+
+[sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_u7g1f"]
+
+[sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_wbsp8"]
+
+[sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_gycnf"]
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_u7g1f"), SubResource("VoxelBlockyModelCube_wbsp8")])
+
+[sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_5h3no"]
+library = SubResource("VoxelBlockyLibrary_gycnf")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_slk0g"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0gxo2"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gpf5q"]
+
+[sub_resource type="Sky" id="Sky_52hxo"]
+sky_material = SubResource("ProceduralSkyMaterial_gpf5q")
+
+[sub_resource type="Environment" id="Environment_6wmoe"]
+background_mode = 2
+sky = SubResource("Sky_52hxo")
+ambient_light_source = 3
+ambient_light_color = Color(0.86, 0.91366667, 1, 1)
+
+[node name="TestLevel2" type="Node3D" unique_id=1438100287]
+
+[node name="Ground" type="VoxelTerrain" parent="." unique_id=2096468790]
+material_override = SubResource("StandardMaterial3D_cib78")
+generator = SubResource("VoxelGeneratorNoise2D_btw1g")
+mesher = SubResource("VoxelMesherBlocky_5h3no")
+
+[node name="Player3D" type="CharacterBody3D" parent="." unique_id=1103256532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5280485, 1.961465, 0.8733928)
+script = ExtResource("1_btw1g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player3D" unique_id=2035127985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_slk0g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player3D" unique_id=51441421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_0gxo2")
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Player3D" unique_id=1129276491]
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=706624548 node_paths=PackedStringArray("target")]
+script = ExtResource("2_u7g1f")
+target = NodePath("../Player3D")
+
+[node name="3PCamera" type="Camera3D" parent="CameraPivot" unique_id=1660914804]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+fov = 80.0
+
+[node name="CollisionChecker" type="RayCast3D" parent="CameraPivot" unique_id=1172278208]
+target_position = Vector3(0, 0, 10)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=76530863]
+environment = SubResource("Environment_6wmoe")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=405973639]
+transform = Transform3D(0.9659259, -0.18301272, 0.18301272, 0, 0.7071068, 0.7071068, -0.25881907, -0.6830127, 0.6830127, 0, 0, 0)
