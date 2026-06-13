@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bbnnitvnr5thj"]
+[gd_scene format=4 uid="uid://bbnnitvnr5thj"]
 
 [ext_resource type="Script" uid="uid://nuiac7uthg14" path="res://scripts/MainMenu.cs" id="1_f5m3c"]
 [ext_resource type="FontFile" uid="uid://bocyi0af5spvx" path="res://other/nk57-monospace.cdrg-bold.otf" id="3_dm0xh"]
@@ -49,29 +49,29 @@ texture_region_size = Vector2i(24, 24)
 tile_size = Vector2i(24, 24)
 sources/0 = SubResource("TileSetAtlasSource_vhy51")
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Node2D" unique_id=1932342537]
 script = ExtResource("1_f5m3c")
-NextLevel = "uid://dc02mw6u2dclp"
+NextLevel = "uid://tn8o5kejvfag"
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2146734651]
 volume_db = -10.0
 autoplay = true
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="." unique_id=1517399697]
 offset_top = 100.0
 offset_right = 1152.0
 offset_bottom = 172.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 72
-text = "Khemia Apéoros"
+text = "Khemia"
 label_settings = SubResource("LabelSettings_rtw2f")
 horizontal_alignment = 1
 
-[node name="anchor0" type="Node2D" parent="."]
+[node name="anchor0" type="Node2D" parent="." unique_id=1185979096]
 position = Vector2(576, 354.5)
 scale = Vector2(0.25, 0.25)
 
-[node name="Credits" type="Label" parent="anchor0"]
+[node name="Credits" type="Label" parent="anchor0" unique_id=1301357645]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -87,11 +87,11 @@ something went wrong"
 label_settings = ExtResource("5_8ke2i")
 horizontal_alignment = 1
 
-[node name="anchor1" type="Node2D" parent="."]
+[node name="anchor1" type="Node2D" parent="." unique_id=100438509]
 position = Vector2(576, 336)
 scale = Vector2(0.325, 0.325)
 
-[node name="Options" type="VFlowContainer" parent="anchor1"]
+[node name="Options" type="VFlowContainer" parent="anchor1" unique_id=218603262]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -104,19 +104,19 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = SubResource("Theme_oa1go")
 
-[node name="StartButton" type="Button" parent="anchor1/Options"]
+[node name="StartButton" type="Button" parent="anchor1/Options" unique_id=1231734179]
 layout_mode = 2
 text = "Start"
 
-[node name="FullscreenButton" type="Button" parent="anchor1/Options"]
+[node name="FullscreenButton" type="Button" parent="anchor1/Options" unique_id=2000939097]
 layout_mode = 2
 text = "Toggle Fullscreen"
 
-[node name="ExitButton" type="Button" parent="anchor1/Options"]
+[node name="ExitButton" type="Button" parent="anchor1/Options" unique_id=1459486765]
 layout_mode = 2
 text = "Quit"
 
-[node name="Sky" type="TileMapLayer" parent="."]
+[node name="Sky" type="TileMapLayer" parent="." unique_id=1760693317]
 z_index = -1
 use_parent_material = true
 scale = Vector2(2, 2)
