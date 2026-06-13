@@ -44,11 +44,19 @@ public partial class CameraPivot : Node3D
 
     public override void _Process(double delta)
     {
-		float zoom_direction = Input.GetAxis("zoom_in", "zoom_out");
+		float zoom_direction = 0f; // workaround because GetAxis didn't work for some reason
+		if (Input.IsActionJustPressed("zoom_in"))
+		{
+			zoom_direction = -1f;
+		}
+		if (Input.IsActionJustPressed("zoom_out"))
+		{
+			zoom_direction += 1f;
+		}
 		if (zoom_direction != 0f)
 		{
 			float new_zoom = Camera.Position.Z + zoomSpeed * zoom_direction;
-			Mathf.Clamp(new_zoom, zoomMin, zoomMax);
+			new_zoom = Mathf.Clamp(new_zoom, zoomMin, zoomMax);
 			Camera.Position = new Vector3(0, 0, new_zoom);
 		}
 
@@ -57,23 +65,4 @@ public partial class CameraPivot : Node3D
 		position += 0.5f * toTarget;
 		Position = position;
     }
-
-
-		/*
-		if event is InputEventMouseMotion:
-			if Input.is_action_pressed("camera_pivot"):
-				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-				var mouse_movement_x = event.relative.x
-				var mouse_movement_y = event.relative.y
-				rotation += Vector3(mouse_movement_y*-0.005*sensitivity_y, mouse_movement_x*-0.005*sensitivity_x, 0)
-				rotation.x = clamp(rotation.x, -PI/2, PI/2)
-			else:
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		elif event is InputEventMouse:
-			if Input.is_action_just_pressed("camera_zoom_in"):
-				$Camera.position.z -= zoom_speed
-			if Input.is_action_just_pressed("camera_zoom_out"):
-				$Camera.position.z += zoom_speed
-			$Camera.position.z = clamp($Camera.position.z, zoom_min, zoom_max)
-		*/
 }
