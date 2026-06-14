@@ -80,7 +80,7 @@ public partial class CameraPivot : Node3D
     }
 
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
 		Vector3 position = Position;
 		Vector3 toTarget = cameraTarget.Position + new Vector3(0, verticalOffset, 0) - position;
