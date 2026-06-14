@@ -13,6 +13,7 @@ public partial class CameraPivot : Node3D
 	[Export] public float selectionDistance = 1000f;
 
 	private float targetZoom = 10f;
+	private Vector2? capturedMousePosition = null;
 
 	private Camera3D Camera;
 	private RayCast3D CollisionChecker;
@@ -67,16 +68,13 @@ public partial class CameraPivot : Node3D
 			Vector3 rotation = Rotation;
 			if (Input.IsActionPressed("rotate_camera"))
 			{
-				
+				capturedMousePosition ??= GetViewport().GetMousePosition(); // assign if null
+				Input.MouseMode = Input.MouseModeEnum.Captured;
 				Vector2 mouseMovement = motion.ScreenRelative;
 				rotation += new Vector3(mouseMovement.Y * -0.005f * sensitivityY, mouseMovement.X * -0.005f * sensitivityX, 0);
 				rotation.X = Mathf.Clamp(rotation.X, -Mathf.Pi, Mathf.Pi);
 				Rotation = rotation;
 				UpdateCameraZoom();
-			}
-			else
-			{
-				Input.MouseMode = Input.MouseModeEnum.Visible;
 			}
 		}
     }
@@ -109,6 +107,12 @@ public partial class CameraPivot : Node3D
 		
 		if (!Input.IsActionPressed("rotate_camera"))
 		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+			if (capturedMousePosition != null)
+			{	// right side will never execute but has to be there because the compiler is dumb
+				GetViewport().WarpMouse(capturedMousePosition ?? new Vector2(0, 0));
+				capturedMousePosition = null;
+			}
 			Dictionary target = RaycastFromCursor();
 			if (target.Count > 0)
 			{
