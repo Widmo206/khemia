@@ -1,15 +1,16 @@
 using Godot;
-using System;
+using Godot.Collections;
 
 public partial class CameraPivot : Node3D
 {
-	[Export] public float verticalOffset = 1f;
-	[Export] public float zoomSpeed      = 1f;
-	[Export] public float zoomMin        = 2f;
-	[Export] public float zoomMax        = 30f;
-	[Export] public float sensitivityX   = 1f;
-	[Export] public float sensitivityY   = 1f;
 	[Export] public Node3D cameraTarget;
+	[Export] public float verticalOffset    = 1f;
+	[Export] public float zoomSpeed         = 1f;
+	[Export] public float zoomMin           = 2f;
+	[Export] public float zoomMax           = 30f;
+	[Export] public float sensitivityX      = 1f;
+	[Export] public float sensitivityY      = 1f;
+	[Export] public float selectionDistance = 1000f;
 
 	private float targetZoom = 10f;
 
@@ -17,6 +18,10 @@ public partial class CameraPivot : Node3D
 	private RayCast3D CollisionChecker;
 
 
+	[Signal]
+    public delegate void CursorRaycastEventHandler();
+	
+	
 	private void UpdateCameraZoom()
 	{
 		float zoomLevel;
@@ -30,6 +35,20 @@ public partial class CameraPivot : Node3D
 			zoomLevel = targetZoom;
 		}
 		Camera.Position = new Vector3(0, 0, zoomLevel);
+	}
+
+
+	private Dictionary RaycastFromCursor()
+	{
+		PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
+		Vector2 mousePos = GetViewport().GetMousePosition();
+
+		Vector3 origin = Camera.ProjectRayOrigin(mousePos);
+		Vector3 end = origin + Camera.ProjectRayNormal(mousePos) * selectionDistance;
+		PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(origin, end);
+		query.CollideWithAreas = true;
+
+		return spaceState.IntersectRay(query);
 	}
 
 
@@ -88,5 +107,14 @@ public partial class CameraPivot : Node3D
 		CollisionChecker.TargetPosition = new Vector3(0, 0, targetZoom);
 		UpdateCameraZoom();
 		
+		if (!Input.IsActionPressed("rotate_camera"))
+		{
+			Dictionary target = RaycastFromCursor();
+			if (target.Count > 0)
+			{
+				GD.Print(target["position"]);
+				EmitSignal(SignalName.CursorRaycast);
+			}
+		}
     }
 }
