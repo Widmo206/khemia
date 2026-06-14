@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6oa08ok2smtm" path="res://scripts/Player3D.cs" id="1_btw1g"]
 [ext_resource type="Script" uid="uid://bare2qiduph7x" path="res://scripts/CameraPivot.cs" id="2_u7g1f"]
+[ext_resource type="Script" uid="uid://c6gprcjsdblpd" path="res://scripts/PlayerRaycastVisualizer.cs" id="3_u7g1f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cib78"]
 vertex_color_use_as_albedo = true
@@ -55,6 +56,13 @@ sky = SubResource("Sky_52hxo")
 ambient_light_source = 3
 ambient_light_color = Color(0.86, 0.91366667, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbsp8"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gycnf"]
+material = SubResource("StandardMaterial3D_wbsp8")
+
 [node name="TestLevel2" type="Node3D" unique_id=1438100287]
 
 [node name="Ground" type="VoxelTerrain" parent="." unique_id=2096468790]
@@ -92,3 +100,11 @@ environment = SubResource("Environment_6wmoe")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=405973639]
 transform = Transform3D(0.9659259, -0.18301272, 0.18301272, 0, 0.7071068, 0.7071068, -0.25881907, -0.6830127, 0.6830127, 0, 0, 0)
+
+[node name="PlayerRaycastVisualizer" type="MeshInstance3D" parent="." unique_id=1007012502]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_gycnf")
+script = ExtResource("3_u7g1f")
+
+[connection signal="CursorRaycast" from="CameraPivot" to="PlayerRaycastVisualizer" method="OnCameraRaycast"]

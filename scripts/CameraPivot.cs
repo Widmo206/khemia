@@ -20,7 +20,7 @@ public partial class CameraPivot : Node3D
 
 
 	[Signal]
-    public delegate void CursorRaycastEventHandler();
+    public delegate void CursorRaycastEventHandler(Dictionary result);
 	
 	
 	private void UpdateCameraZoom()
@@ -116,7 +116,7 @@ public partial class CameraPivot : Node3D
 			if (target.Count > 0)
 			{
 				GD.Print(target["position"]);
-				EmitSignal(SignalName.CursorRaycast);
+				EmitSignal(SignalName.CursorRaycast, target);
 			}
 		}
     }
