@@ -72,7 +72,7 @@ public partial class CameraPivot : Node3D
 				Input.MouseMode = Input.MouseModeEnum.Captured;
 				Vector2 mouseMovement = motion.ScreenRelative;
 				rotation += new Vector3(mouseMovement.Y * -0.005f * sensitivityY, mouseMovement.X * -0.005f * sensitivityX, 0);
-				rotation.X = Mathf.Clamp(rotation.X, -Mathf.Pi, Mathf.Pi);
+				rotation.X = Mathf.Clamp(rotation.X, -Mathf.Pi/2, Mathf.Pi/2);
 				Rotation = rotation;
 				UpdateCameraZoom();
 			}
