@@ -100,7 +100,6 @@ public partial class CameraPivot : Node3D
 		{
 			targetZoom += zoomSpeed * zoomDirection;
 			targetZoom = Mathf.Clamp(targetZoom, zoomMin, zoomMax);
-			GD.Print(targetZoom);
 		}
 		CollisionChecker.TargetPosition = new Vector3(0, 0, targetZoom);
 		UpdateCameraZoom();
