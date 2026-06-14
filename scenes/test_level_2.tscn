@@ -76,9 +76,9 @@ shape = SubResource("CapsuleShape3D_0gxo2")
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Player3D" unique_id=1129276491]
 
-[node name="CameraPivot" type="Node3D" parent="." unique_id=706624548 node_paths=PackedStringArray("target")]
+[node name="CameraPivot" type="Node3D" parent="." unique_id=706624548 node_paths=PackedStringArray("cameraTarget")]
 script = ExtResource("2_u7g1f")
-target = NodePath("../Player3D")
+cameraTarget = NodePath("../Player3D")
 
 [node name="3PCamera" type="Camera3D" parent="CameraPivot" unique_id=1660914804]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)

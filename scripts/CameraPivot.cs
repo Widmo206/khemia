@@ -3,13 +3,13 @@ using System;
 
 public partial class CameraPivot : Node3D
 {
-	[Export] public Node3D target;
 	[Export] public float verticalOffset = 1f;
 	[Export] public float zoomSpeed      = 1f;
 	[Export] public float zoomMin        = 2f;
 	[Export] public float zoomMax        = 30f;
 	[Export] public float sensitivityX   = 1f;
 	[Export] public float sensitivityY   = 1f;
+	[Export] public Node3D cameraTarget;
 
 	private float targetZoom = 10f;
 
@@ -65,6 +65,11 @@ public partial class CameraPivot : Node3D
 
     public override void _Process(double delta)
     {
+		Vector3 position = Position;
+		Vector3 toTarget = cameraTarget.Position + new Vector3(0, verticalOffset, 0) - position;
+		position += 0.5f * toTarget;
+		Position = position;
+
 		float zoomDirection = 0f; // workaround because GetAxis didn't work for some reason
 		if (Input.IsActionJustPressed("zoom_in"))
 		{
@@ -83,10 +88,5 @@ public partial class CameraPivot : Node3D
 		CollisionChecker.TargetPosition = new Vector3(0, 0, targetZoom);
 		UpdateCameraZoom();
 		
-
-		Vector3 position = Position;
-		Vector3 toTarget = target.Position + new Vector3(0, verticalOffset, 0) - position;
-		position += 0.5f * toTarget;
-		Position = position;
     }
 }
