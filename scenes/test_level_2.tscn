@@ -7,6 +7,7 @@
 vertex_color_use_as_albedo = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_me0hx"]
+noise_type = 4
 
 [sub_resource type="VoxelGeneratorNoise2D" id="VoxelGeneratorNoise2D_btw1g"]
 noise = SubResource("FastNoiseLite_me0hx")
@@ -62,7 +63,7 @@ generator = SubResource("VoxelGeneratorNoise2D_btw1g")
 mesher = SubResource("VoxelMesherBlocky_5h3no")
 
 [node name="Player3D" type="CharacterBody3D" parent="." unique_id=1103256532]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5280485, 1.961465, 0.8733928)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5280485, 5.655799, 0.8733928)
 script = ExtResource("1_btw1g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player3D" unique_id=2035127985]
