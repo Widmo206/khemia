@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b6oa08ok2smtm" path="res://scripts/Player3D.cs" id="1_btw1g"]
 [ext_resource type="Script" uid="uid://bare2qiduph7x" path="res://scripts/CameraPivot.cs" id="2_u7g1f"]
 [ext_resource type="Script" uid="uid://c6gprcjsdblpd" path="res://scripts/PlayerRaycastVisualizer.cs" id="3_u7g1f"]
+[ext_resource type="Script" uid="uid://cdwsrpwfpqim0" path="res://scripts/TileSelector.cs" id="4_wbsp8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cib78"]
 vertex_color_use_as_albedo = true
@@ -63,6 +64,14 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_gycnf"]
 material = SubResource("StandardMaterial3D_wbsp8")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gycnf"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.65, 0, 0.49803922)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5h3no"]
+material = SubResource("StandardMaterial3D_gycnf")
+
 [node name="TestLevel2" type="Node3D" unique_id=1438100287]
 
 [node name="Ground" type="VoxelTerrain" parent="." unique_id=2096468790]
@@ -107,4 +116,10 @@ cast_shadow = 0
 mesh = SubResource("SphereMesh_gycnf")
 script = ExtResource("3_u7g1f")
 
+[node name="TileSelector" type="MeshInstance3D" parent="." unique_id=1269092260]
+transform = Transform3D(1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0, 0, 0)
+mesh = SubResource("BoxMesh_5h3no")
+script = ExtResource("4_wbsp8")
+
 [connection signal="CursorRaycast" from="CameraPivot" to="PlayerRaycastVisualizer" method="OnCameraRaycast"]
+[connection signal="CursorRaycast" from="CameraPivot" to="TileSelector" method="OnCameraRaycast"]
