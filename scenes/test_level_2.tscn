@@ -15,10 +15,22 @@ height_range = 100.0
 
 [sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_u7g1f"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btw1g"]
+albedo_color = Color(0.46, 0.32660002, 0.1932, 1)
+
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_wbsp8"]
+color = Color(0.45882353, 0.3254902, 0.19215687, 1)
+material_override_0 = SubResource("StandardMaterial3D_btw1g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u7g1f"]
+albedo_color = Color(0, 0.50980395, 0.03529412, 1)
+
+[sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_u7g1f"]
+color = Color(0, 0.51, 0.03399997, 1)
+material_override_0 = SubResource("StandardMaterial3D_u7g1f")
 
 [sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_gycnf"]
-models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_u7g1f"), SubResource("VoxelBlockyModelCube_wbsp8")])
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_u7g1f"), SubResource("VoxelBlockyModelCube_wbsp8"), SubResource("VoxelBlockyModelCube_u7g1f")])
 
 [sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_5h3no"]
 library = SubResource("VoxelBlockyLibrary_gycnf")
