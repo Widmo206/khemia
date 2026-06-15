@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://tn8o5kejvfag"]
 
 [ext_resource type="Script" uid="uid://b6oa08ok2smtm" path="res://scripts/Player3D.cs" id="1_btw1g"]
+[ext_resource type="Script" uid="uid://b4170bec5s372" path="res://scripts/Ground.cs" id="1_gycnf"]
 [ext_resource type="Script" uid="uid://bare2qiduph7x" path="res://scripts/CameraPivot.cs" id="2_u7g1f"]
 [ext_resource type="Script" uid="uid://c6gprcjsdblpd" path="res://scripts/PlayerRaycastVisualizer.cs" id="3_u7g1f"]
 [ext_resource type="Script" uid="uid://cdwsrpwfpqim0" path="res://scripts/TileSelector.cs" id="4_wbsp8"]
@@ -78,6 +79,7 @@ material = SubResource("StandardMaterial3D_gycnf")
 material_override = SubResource("StandardMaterial3D_cib78")
 generator = SubResource("VoxelGeneratorNoise2D_btw1g")
 mesher = SubResource("VoxelMesherBlocky_5h3no")
+script = ExtResource("1_gycnf")
 
 [node name="Player3D" type="CharacterBody3D" parent="." unique_id=1103256532]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5280485, 5.655799, 0.8733928)
