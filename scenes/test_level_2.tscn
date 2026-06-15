@@ -6,16 +6,13 @@
 [ext_resource type="Script" uid="uid://c6gprcjsdblpd" path="res://scripts/PlayerRaycastVisualizer.cs" id="3_u7g1f"]
 [ext_resource type="Script" uid="uid://cdwsrpwfpqim0" path="res://scripts/TileSelector.cs" id="4_wbsp8"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cib78"]
-vertex_color_use_as_albedo = true
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_me0hx"]
 noise_type = 4
 
 [sub_resource type="VoxelGeneratorNoise2D" id="VoxelGeneratorNoise2D_btw1g"]
-noise = SubResource("FastNoiseLite_me0hx")
 channel = 0
 height_range = 100.0
+noise = SubResource("FastNoiseLite_me0hx")
 
 [sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_u7g1f"]
 
@@ -38,6 +35,9 @@ models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_u7g1f"), Su
 
 [sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_5h3no"]
 library = SubResource("VoxelBlockyLibrary_gycnf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cib78"]
+vertex_color_use_as_albedo = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_slk0g"]
 radius = 0.4
@@ -76,9 +76,9 @@ material = SubResource("StandardMaterial3D_gycnf")
 [node name="TestLevel2" type="Node3D" unique_id=1438100287]
 
 [node name="Ground" type="VoxelTerrain" parent="." unique_id=2096468790]
-material_override = SubResource("StandardMaterial3D_cib78")
 generator = SubResource("VoxelGeneratorNoise2D_btw1g")
 mesher = SubResource("VoxelMesherBlocky_5h3no")
+material_override = SubResource("StandardMaterial3D_cib78")
 script = ExtResource("1_gycnf")
 
 [node name="Player3D" type="CharacterBody3D" parent="." unique_id=1103256532]

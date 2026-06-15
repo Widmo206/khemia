@@ -115,7 +115,6 @@ public partial class CameraPivot : Node3D
 			Dictionary target = RaycastFromCursor();
 			if (target.Count > 0)
 			{
-				GD.Print(target["position"]);
 				EmitSignal(SignalName.CursorRaycast, target);
 			}
 		}
