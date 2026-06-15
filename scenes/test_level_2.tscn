@@ -48,6 +48,8 @@ radius = 0.4
 height = 1.8
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gpf5q"]
+sky_top_color = Color(0.2074, 0.43554, 0.61, 1)
+ground_bottom_color = Color(0.185, 0.24358337, 0.37, 1)
 
 [sub_resource type="Sky" id="Sky_52hxo"]
 sky_material = SubResource("ProceduralSkyMaterial_gpf5q")
@@ -111,6 +113,7 @@ environment = SubResource("Environment_6wmoe")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=405973639]
 transform = Transform3D(0.9659259, -0.18301272, 0.18301272, 0, 0.7071068, 0.7071068, -0.25881907, -0.6830127, 0.6830127, 0, 0, 0)
+light_color = Color(1, 0.986, 0.88, 1)
 
 [node name="PlayerRaycastVisualizer" type="MeshInstance3D" parent="." unique_id=1007012502]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
