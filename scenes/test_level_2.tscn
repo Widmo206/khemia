@@ -126,5 +126,5 @@ transform = Transform3D(1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0, 0, 0)
 mesh = SubResource("BoxMesh_5h3no")
 script = ExtResource("4_wbsp8")
 
-[connection signal="CursorRaycast" from="CameraPivot" to="PlayerRaycastVisualizer" method="OnCameraRaycast"]
-[connection signal="CursorRaycast" from="CameraPivot" to="TileSelector" method="OnCameraRaycast"]
+[connection signal="ObjectSelected" from="CameraPivot" to="PlayerRaycastVisualizer" method="OnCameraRaycast"]
+[connection signal="ObjectSelected" from="CameraPivot" to="TileSelector" method="OnObjectSelected"]

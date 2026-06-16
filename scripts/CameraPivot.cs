@@ -20,7 +20,7 @@ public partial class CameraPivot : Node3D
 
 
 	[Signal]
-    public delegate void CursorRaycastEventHandler(Dictionary result);
+    public delegate void ObjectSelectedEventHandler(Dictionary result);
 	
 	
 	private void UpdateCameraZoom()
@@ -108,14 +108,14 @@ public partial class CameraPivot : Node3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 			if (capturedMousePosition != null)
-			{	// right side will never execute but has to be there because the compiler is dumb
+			{	// right side should never execute but has to be there because the compiler is dumb
 				GetViewport().WarpMouse(capturedMousePosition ?? new Vector2(0, 0));
 				capturedMousePosition = null;
 			}
 			Dictionary target = RaycastFromCursor();
 			if (target.Count > 0)
 			{
-				EmitSignal(SignalName.CursorRaycast, target);
+				EmitSignal(SignalName.ObjectSelected, target);
 			}
 		}
     }

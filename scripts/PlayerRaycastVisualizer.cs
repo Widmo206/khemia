@@ -5,6 +5,14 @@ public partial class PlayerRaycastVisualizer : MeshInstance3D
 {
 	public void OnCameraRaycast(Dictionary data)
 	{
-		Position = (Vector3)data["position"];
+		if (data.Count > 0)
+		{
+			Position = (Vector3)data["position"];
+			Visible = true;
+		}
+		else
+		{
+			Visible = false;
+		}
 	}
 }
