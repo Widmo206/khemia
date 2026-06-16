@@ -4,10 +4,13 @@ using System;
 
 public partial class Player3D : CharacterBody3D
 {
-	private Node3D Camera;
-
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
+	private bool inTileBreakMode = true;
+
+
+	private Node3D Camera;
+	private TileSelector TileSelector;
 
 
 	public Vector3I GetTilePosition(Vector3 position)
@@ -22,8 +25,8 @@ public partial class Player3D : CharacterBody3D
 
     public override void _Ready()
     {
-        base._Ready();
 		Camera = GetNode<Node3D>("../CameraPivot");
+		TileSelector = GetNode<TileSelector>("../TileSelector");
     }
 
 
@@ -36,8 +39,17 @@ public partial class Player3D : CharacterBody3D
 		Node3D target_node = (Node3D)target["collider"];
 		if (target_node is VoxelTerrain)
 		{
-			Vector3 offsetTargetPosition = (Vector3)target["position"] - (Vector3)target["normal"] * 0.001f;
-			(target_node as Ground).BreakTile(GetTilePosition(offsetTargetPosition));
+			if (inTileBreakMode)
+			{
+				Vector3 offsetTargetPosition = (Vector3)target["position"] - (Vector3)target["normal"] * 0.001f;
+				(target_node as Ground).BreakTile(GetTilePosition(offsetTargetPosition));
+			}
+			else
+			{
+				Vector3 offsetTargetPosition = (Vector3)target["position"] + (Vector3)target["normal"] * 0.001f;
+				(target_node as Ground).PlaceTile(GetTilePosition(offsetTargetPosition), 2);
+			}
+			
 		}
 	}
 
@@ -56,6 +68,19 @@ public partial class Player3D : CharacterBody3D
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
+		}
+
+		if (Input.IsActionJustPressed("change_item_mode"))
+		{
+			inTileBreakMode = !inTileBreakMode;
+			if (inTileBreakMode)
+			{
+				TileSelector.Mode = TileSelector.SelectorMode.Break;
+			}
+			else
+			{
+				TileSelector.Mode = TileSelector.SelectorMode.Place;
+			}
 		}
 
 		// Get the input direction and handle the movement/deceleration.

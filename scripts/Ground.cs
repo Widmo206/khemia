@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Data.Common;
 
 public partial class Ground : VoxelTerrain
 {
@@ -19,5 +20,12 @@ public partial class Ground : VoxelTerrain
 	public void BreakTile(Vector3I position)
 	{
 		breakTool.DoPoint(position);
+	}
+
+
+	public void PlaceTile(Vector3I position, ulong id)
+	{
+		placeTool.Value = id;
+		placeTool.DoPoint(position);
 	}
 }
