@@ -63,9 +63,12 @@ ambient_light_color = Color(0.86, 0.91366667, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbsp8"]
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
+fixed_size = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_gycnf"]
 material = SubResource("StandardMaterial3D_wbsp8")
+radius = 0.025
+height = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gycnf"]
 transparency = 1
