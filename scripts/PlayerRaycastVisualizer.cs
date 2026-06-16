@@ -3,11 +3,11 @@ using Godot.Collections;
 
 public partial class PlayerRaycastVisualizer : MeshInstance3D
 {
-	public void OnCameraRaycast(Dictionary data)
+	public void OnCameraRaycast(Dictionary target)
 	{
-		if (data.Count > 0)
+		if (target.Count > 0)
 		{
-			Position = (Vector3)data["position"];
+			Position = (Vector3)target["position"];
 			Visible = true;
 		}
 		else

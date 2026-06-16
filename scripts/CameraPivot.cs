@@ -19,8 +19,7 @@ public partial class CameraPivot : Node3D
 	private RayCast3D CollisionChecker;
 
 
-	[Signal]
-    public delegate void ObjectSelectedEventHandler(Dictionary result);
+	[Signal] public delegate void ObjectSelectedEventHandler(Dictionary target);
 	
 	
 	private void UpdateCameraZoom()

@@ -23,17 +23,17 @@ public partial class TileSelector : MeshInstance3D
 	}
 
 
-	public void OnObjectSelected(Dictionary data)
+	public void OnObjectSelected(Dictionary target)
 	{
-		if (data.Count == 0)
+		if (target.Count == 0)
 		{
 			Visible = false;
 			return;
 		}
-		Node3D collider = (Node3D)data["collider"];
+		Node3D collider = (Node3D)target["collider"];
 		if (collider is VoxelTerrain){
 			Visible = true;
-			Vector3 targetPosition = (Vector3)data["position"] + (int)mode * (Vector3)data["normal"] * 0.001f; // is this jank?
+			Vector3 targetPosition = (Vector3)target["position"] + (int)mode * (Vector3)target["normal"] * 0.001f; // is this jank?
 			Position = GetTileCenteredPosition(targetPosition);
 		}
 		else
