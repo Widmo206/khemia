@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class Player3D : CharacterBody3D
@@ -9,11 +10,36 @@ public partial class Player3D : CharacterBody3D
 	public const float JumpVelocity = 4.5f;
 
 
+	public Vector3I GetTilePosition(Vector3 position)
+	{
+		return new Vector3I(
+			(int)Mathf.Snapped(position.X - 0.5f, 1),
+			(int)Mathf.Snapped(position.Y - 0.5f, 1),
+			(int)Mathf.Snapped(position.Z - 0.5f, 1)
+		);
+	}
+
+
     public override void _Ready()
     {
         base._Ready();
 		Camera = GetNode<Node3D>("../CameraPivot");
     }
+
+
+	public void OnUseItem(Dictionary target)
+	{
+		if (target.Count == 0)
+		{
+			return;
+		}
+		Node3D target_node = (Node3D)target["collider"];
+		if (target_node is VoxelTerrain)
+		{
+			Vector3 offsetTargetPosition = (Vector3)target["position"] - (Vector3)target["normal"] * 0.001f;
+			(target_node as Ground).BreakTile(GetTilePosition(offsetTargetPosition));
+		}
+	}
 
 
 	public override void _PhysicsProcess(double delta)

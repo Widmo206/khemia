@@ -20,6 +20,7 @@ public partial class CameraPivot : Node3D
 
 
 	[Signal] public delegate void ObjectSelectedEventHandler(Dictionary target);
+	[Signal] public delegate void PlayerUseItemEventHandler(Dictionary target);
 	
 	
 	private void UpdateCameraZoom()
@@ -115,6 +116,10 @@ public partial class CameraPivot : Node3D
 			if (target.Count > 0)
 			{
 				EmitSignal(SignalName.ObjectSelected, target);
+			}
+			if (Input.IsActionJustPressed("use_item"))
+			{
+				EmitSignal(SignalName.PlayerUseItem, target);
 			}
 		}
     }

@@ -3,14 +3,21 @@ using System;
 
 public partial class Ground : VoxelTerrain
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		
-	}
+	private VoxelTool breakTool;
+	private VoxelTool placeTool;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+
+    public override void _Ready()
+    {
+        breakTool = GetVoxelTool();
+		breakTool.Mode = VoxelTool.ModeEnum.Remove;
+		placeTool = GetVoxelTool();
+		placeTool.Mode = VoxelTool.ModeEnum.Set;
+    }
+
+
+	public void BreakTile(Vector3I position)
 	{
+		breakTool.DoPoint(position);
 	}
 }

@@ -70,13 +70,12 @@ material = SubResource("StandardMaterial3D_wbsp8")
 radius = 0.025
 height = 0.05
 
+[sub_resource type="BoxMesh" id="BoxMesh_5h3no"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gycnf"]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(1, 0.65, 0, 0.49803922)
-
-[sub_resource type="BoxMesh" id="BoxMesh_5h3no"]
-material = SubResource("StandardMaterial3D_gycnf")
+albedo_color = Color(1, 1, 1, 0.49803922)
 
 [node name="TestLevel2" type="Node3D" unique_id=1438100287]
 
@@ -127,7 +126,9 @@ script = ExtResource("3_u7g1f")
 [node name="TileSelector" type="MeshInstance3D" parent="." unique_id=1269092260]
 transform = Transform3D(1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0, 0, 0)
 mesh = SubResource("BoxMesh_5h3no")
+surface_material_override/0 = SubResource("StandardMaterial3D_gycnf")
 script = ExtResource("4_wbsp8")
 
 [connection signal="ObjectSelected" from="CameraPivot" to="PlayerRaycastVisualizer" method="OnCameraRaycast"]
 [connection signal="ObjectSelected" from="CameraPivot" to="TileSelector" method="OnObjectSelected"]
+[connection signal="PlayerUseItem" from="CameraPivot" to="Player3D" method="OnUseItem"]
