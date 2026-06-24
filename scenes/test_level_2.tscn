@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://tn8o5kejvfag"]
 
+[ext_resource type="Texture2D" uid="uid://c73ffisaef43w" path="res://sprites/ground_atlas.png" id="1_5h3no"]
 [ext_resource type="Script" uid="uid://b6oa08ok2smtm" path="res://scripts/Player3D.cs" id="1_btw1g"]
 [ext_resource type="Script" uid="uid://b4170bec5s372" path="res://scripts/Ground.cs" id="1_gycnf"]
 [ext_resource type="Script" uid="uid://bare2qiduph7x" path="res://scripts/CameraPivot.cs" id="2_u7g1f"]
@@ -16,12 +17,10 @@ noise = SubResource("FastNoiseLite_me0hx")
 
 [sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_u7g1f"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btw1g"]
-albedo_color = Color(0.46, 0.32660002, 0.1932, 1)
-
-[sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_wbsp8"]
-color = Color(0.45882353, 0.3254902, 0.19215687, 1)
-material_override_0 = SubResource("StandardMaterial3D_btw1g")
+[sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_slk0g"]
+color = Color(1, 0.81960785, 0.6156863, 1)
+atlas_size_in_tiles = Vector2i(32, 32)
+tile_bottom = Vector2i(1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u7g1f"]
 albedo_color = Color(0, 0.50980395, 0.03529412, 1)
@@ -29,15 +28,24 @@ albedo_color = Color(0, 0.50980395, 0.03529412, 1)
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_u7g1f"]
 color = Color(0, 0.51, 0.03399997, 1)
 material_override_0 = SubResource("StandardMaterial3D_u7g1f")
+atlas_size_in_tiles = Vector2i(32, 24)
+tile_left = Vector2i(1, 0)
+tile_right = Vector2i(1, 0)
+tile_bottom = Vector2i(1, 0)
+tile_top = Vector2i(1, 0)
+tile_back = Vector2i(1, 0)
+tile_front = Vector2i(1, 0)
 
 [sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_gycnf"]
-models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_u7g1f"), SubResource("VoxelBlockyModelCube_wbsp8"), SubResource("VoxelBlockyModelCube_u7g1f")])
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_u7g1f"), SubResource("VoxelBlockyModelCube_slk0g"), SubResource("VoxelBlockyModelCube_u7g1f")])
 
 [sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_5h3no"]
 library = SubResource("VoxelBlockyLibrary_gycnf")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cib78"]
 vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_5h3no")
+texture_filter = 0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_slk0g"]
 radius = 0.4
