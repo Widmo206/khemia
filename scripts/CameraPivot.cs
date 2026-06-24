@@ -3,7 +3,7 @@ using Godot.Collections;
 
 public partial class CameraPivot : Node3D
 {
-	[Export] public Node3D cameraTarget;
+	[Export] public required Node3D cameraTarget;
 	[Export] public float verticalOffset    = 1f;
 	[Export] public float zoomSpeed         = 1f;
 	[Export] public float zoomMin           = 2f;
@@ -15,8 +15,8 @@ public partial class CameraPivot : Node3D
 	private float targetZoom = 10f;
 	private Vector2? capturedMousePosition = null;
 
-	private Camera3D Camera;
-	private RayCast3D CollisionChecker;
+	public required Camera3D Camera;
+	public required RayCast3D CollisionChecker;
 
 
 	[Signal] public delegate void ObjectSelectedEventHandler(Dictionary target);
@@ -63,8 +63,8 @@ public partial class CameraPivot : Node3D
     public override void _Input(InputEvent @event)
     {
 		if (@event is InputEventMouseMotion)
-		{
-			InputEventMouseMotion motion = @event as InputEventMouseMotion;
+		{   // no I don't know if this is the right way to do it
+			InputEventMouseMotion motion = (@event as InputEventMouseMotion)!;
 			Vector3 rotation = Rotation;
 			if (Input.IsActionPressed("rotate_camera"))
 			{
@@ -108,8 +108,8 @@ public partial class CameraPivot : Node3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 			if (capturedMousePosition != null)
-			{	// right side should never execute but has to be there because the compiler is dumb
-				GetViewport().WarpMouse(capturedMousePosition ?? new Vector2(0, 0));
+			{
+				GetViewport().WarpMouse((Vector2)capturedMousePosition);
 				capturedMousePosition = null;
 			}
 			Dictionary target = RaycastFromCursor();
